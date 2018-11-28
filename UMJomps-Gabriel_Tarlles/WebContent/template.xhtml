@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>UMJomps</title>
+	<h:outputStylesheet name="style.css" library="css" />
+</h:head>
+
+<h:body>
+	<div id="header">
+		<h:graphicImage library="imagens" name="logo.jpg" id="logo"/>
+		<div style="float: right; margin: 10px 10px 0 0;">
+			<p>Escolha o seu tema:</p>
+			<h:form>
+				<p:themeSwitcher>
+					<f:selectItem itemLabel="Rocket" itemValue="rocket"></f:selectItem>
+					<f:selectItem itemLabel="Aristo" itemValue="aristo"></f:selectItem>
+					<f:selectItem itemLabel="BlueSky" itemValue="bluesky"></f:selectItem>
+					<f:selectItem itemLabel="Midnight" itemValue="midnight"></f:selectItem>
+					<f:selectItem itemLabel="Bootstrap" itemValue="bootstrap"></f:selectItem>
+					<f:selectItem itemLabel="Afternoon" itemValue="afternoon"></f:selectItem>
+					<f:selectItem itemLabel="Dot-luv" itemValue="dot-luv"></f:selectItem>
+					<f:ajax />
+				</p:themeSwitcher>
+			</h:form>
+		</div>
+		
+		<div id="userLogged">
+			<h:form rendered="#{usuarioBean.usuario.username != null}">
+				<h:outputText value="Logado como: #{usuarioBean.usuario.username}"></h:outputText>
+				<h:commandLink value="Logout" action="#{usuarioBean.logout}"></h:commandLink>
+			</h:form>
+		</div>
+		
+		<h:form rendered="#{usuarioBean.usuario.username != null}">
+			<p:menubar>
+				<p:menuitem value="Médicos" url="medico.xhtml" />
+				<p:submenu label="Paciente">
+					<p:menuitem value="Lista de Pacientes" url="listapacientes.xhtml" />
+					<p:menuitem value="Cadastrar Paciente e Atendimentos" url="paciente.xhtml" />
+				</p:submenu>
+			</p:menubar>
+		</h:form>
+	</div>
+
+	<div id="body">
+		<h:messages class="msgerros"/>
+		<ui:insert name="corpo" />
+		<br />
+	</div>
+
+	<div id="footer">Copyleft 2018. Gabriel Pereira, Tarlles Roman</div>
+</h:body>
+</html>
